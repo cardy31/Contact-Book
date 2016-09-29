@@ -1,7 +1,8 @@
 package org.cardy.spring.controller;
 
-import org.cardy.spring.dao.ContactDAO;
-import org.cardy.spring.model.Contact;
+import org.cardy.spring.dao.AccountDAO;
+import org.cardy.spring.dao.RefDAO;
+import org.cardy.spring.model.Ref;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,44 +18,49 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private ContactDAO contactDAO;
+    private AccountDAO accountDAO;
+
+    @Autowired
+    private RefDAO refDAO;
 
     @RequestMapping(value = "/")
-    public List<Contact> listContact(ModelAndView model) throws IOException {
-        List<Contact> listContact = contactDAO.list();
-        model.addObject("listContact", listContact);
+    public List<Ref> listAccounts(ModelAndView model) throws IOException {
+        List<Ref> listRef = refDAO.list();
+        model.addObject("listContact", listRef);
         model.setViewName("home");
 
-        return listContact;
+        return listRef;
     }
 
     @RequestMapping(value = "/newContact", method = RequestMethod.GET)
     public ModelAndView newContact(ModelAndView model) {
-        Contact newContact = new Contact();
-        model.addObject("contact", newContact);
+        Ref newRef = new Ref();
+        model.addObject("contact", newRef);
         model.setViewName("ContactForm");
         return model;
     }
 
     @RequestMapping(value = "/saveContact", method = RequestMethod.POST)
-    public ModelAndView saveContact(@ModelAttribute Contact contact) {
-        contactDAO.saveOrUpdate(contact);
+    public ModelAndView saveContact(@ModelAttribute Ref ref) {
+        refDAO.saveOrUpdate(ref);
         return new ModelAndView("redirect:/");
     }
 
+    //TODO:
     @RequestMapping(value = "/deleteContact", method = RequestMethod.GET)
     public ModelAndView deleteContact(HttpServletRequest request) {
         int contactId = Integer.parseInt(request.getParameter("id"));
-        contactDAO.delete(contactId);
+        refDAO.delete(contactId);
         return new ModelAndView("redirect:/");
     }
 
+    // TODO: Change this to accept data, instead of pushing a form
     @RequestMapping(value = "/editContact", method = RequestMethod.GET)
     public ModelAndView editContact(HttpServletRequest request) {
-        int contactId = Integer.parseInt(request.getParameter("id"));
-        Contact contact = contactDAO.get(contactId);
+        int refId = Integer.parseInt(request.getParameter("id"));
+        Ref ref = refDAO.get(refId);
         ModelAndView model = new ModelAndView("ContactForm");
-        model.addObject("contact", contact);
+        model.addObject("contact", ref);
 
         return model;
     }

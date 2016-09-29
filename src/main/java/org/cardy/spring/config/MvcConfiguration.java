@@ -1,7 +1,6 @@
 package org.cardy.spring.config;
 
-import org.cardy.spring.dao.ContactDAO;
-import org.cardy.spring.dao.ContactDAOImpl;
+import org.cardy.spring.dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -33,10 +32,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public DataSource getDataSource() {
+    public DataSource getRefDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/contactdb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/refdb");
         dataSource.setUsername("tester");
         dataSource.setPassword("public");
 
@@ -44,13 +43,13 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ContactDAO getContactDAO() {
-        return new ContactDAOImpl(getDataSource());
+    public AccountDAO getAccountDAO() {
+        return new AccountDAOImpl(getRefDataSource());
     }
 
-    /*
-     * in theory, I could link in a second table by having another getDataSource() function,
-     * and then create another Bean for say, LoginDAO that links it up to a table of logins.
-     */
+    @Bean
+    public RefDAO getRefDAO() {
+        return new RefDAOImpl(getRefDataSource());
+    }
 
 }
