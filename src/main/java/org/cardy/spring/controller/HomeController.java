@@ -19,11 +19,12 @@ public class HomeController {
     @Autowired
     private RefDAO refDAO;
 
+    // Referee database functions
     @RequestMapping(value = "/")
     public List<Ref> listAccounts(ModelAndView model) throws IOException {
         List<Ref> listRef = refDAO.list();
-        model.addObject("listContact", listRef);
-        model.setViewName("home");
+//        model.addObject("listContact", listRef);
+//        model.setViewName("home");
 
         return listRef;
     }

@@ -32,7 +32,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public DataSource getRefDataSource() {
+    public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/refdb");
@@ -44,7 +44,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public RefDAO getRefDAO() {
-        return new RefDAOImpl(getRefDataSource());
+        return new RefDAOImpl(getDataSource());
+    }
+
+    @Bean
+    public ExecDAO getExecDAO() {
+        return new ExecDAOImpl(getDataSource());
     }
 
 }
