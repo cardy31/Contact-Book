@@ -1,6 +1,5 @@
 package org.cardy.spring.controller;
 
-import org.cardy.spring.dao.AccountDAO;
 import org.cardy.spring.dao.RefDAO;
 import org.cardy.spring.model.Ref;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import java.util.List;
 
 @RestController
 public class HomeController {
-
-    @Autowired
-    private AccountDAO accountDAO;
 
     @Autowired
     private RefDAO refDAO;

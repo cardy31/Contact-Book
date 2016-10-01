@@ -43,11 +43,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public AccountDAO getAccountDAO() {
-        return new AccountDAOImpl(getRefDataSource());
-    }
-
-    @Bean
     public RefDAO getRefDAO() {
         return new RefDAOImpl(getRefDataSource());
     }

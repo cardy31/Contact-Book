@@ -1,10 +1,11 @@
 package org.cardy.spring.model;
 
 public class Ref {
-    private int id;
+    private int user_id;
     private String firstname;
     private String lastname;
     private String email;
+    private String hash;
     private String phone;
     private int level;
     private String area;
@@ -17,20 +18,11 @@ public class Ref {
 
     }
 
-    /**
-     * Constructor with all parameters
-     * @param firstname
-     * @param lastname
-     * @param email
-     * @param phone
-     * @param level
-     * @param area
-     * @param active
-     */
-    public Ref(String firstname, String lastname, String email, String phone, int level, String area, boolean active) {
+    public Ref(String firstname, String lastname, String email, String hash, String phone, int level, String area, boolean active) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.hash = hash;
         this.phone = phone;
         this.level = level;
         this.area = area;
@@ -41,11 +33,11 @@ public class Ref {
      * Getters and Setters
      */
     public int getId() {
-        return id;
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getFirstname() {
@@ -70,6 +62,14 @@ public class Ref {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     public String getPhone() {
