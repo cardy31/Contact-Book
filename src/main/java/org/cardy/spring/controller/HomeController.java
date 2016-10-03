@@ -23,8 +23,6 @@ public class HomeController {
     @RequestMapping(value = "/")
     public List<Ref> listAccounts(ModelAndView model) throws IOException {
         List<Ref> listRef = refDAO.list();
-//        model.addObject("listContact", listRef);
-//        model.setViewName("home");
 
         return listRef;
     }
@@ -52,13 +50,11 @@ public class HomeController {
     }
 
     // TODO: Change this to accept data, instead of pushing a form
-    @RequestMapping(value = "/editContact", method = RequestMethod.GET)
-    public ModelAndView editContact(HttpServletRequest request) {
+    @RequestMapping(value = "/editRef", method = RequestMethod.GET)
+    public Ref editContact(HttpServletRequest request) {
         int refId = Integer.parseInt(request.getParameter("id"));
         Ref ref = refDAO.get(refId);
-        ModelAndView model = new ModelAndView("ContactForm");
-        model.addObject("contact", ref);
 
-        return model;
+        return ref;
     }
 }
